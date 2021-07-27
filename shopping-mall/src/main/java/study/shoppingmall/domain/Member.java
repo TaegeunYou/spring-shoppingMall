@@ -3,6 +3,7 @@ package study.shoppingmall.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import study.shoppingmall.controller.MemberDto;
 import study.shoppingmall.domain.coupon.Coupon;
 
 import javax.persistence.*;
@@ -55,10 +56,23 @@ public class Member {
 //    @OneToOne
 //    private List<Coupon> couponList = new ArrayList<>();  //미구현
 
+    //==생성 메서드==//
     //테스트 용도
     public Member(String email, String pw, String name) {
         this.email = email;
         this.pw = pw;
         this.name = name;
+    }
+    //dto -> entity
+    public Member(MemberDto memberDto) {
+        this.email = memberDto.getEmail();
+        this.pw = memberDto.getPw();
+        this.name = memberDto.getName();
+        this.nickname = memberDto.getNickname();
+        this.nickname = getNickname();
+        this.phone = getPhone();
+        this.birthday = getBirthday();
+        this.gender = getGender();
+        this.address = getAddress();
     }
 }

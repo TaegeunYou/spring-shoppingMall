@@ -11,7 +11,7 @@ import javax.persistence.Embeddable;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Address {
 
-    private String city;
-    private String addressDetail;
     private String zipcode;
+    private String addressBasic;
+    private String addressDetail;
 }
