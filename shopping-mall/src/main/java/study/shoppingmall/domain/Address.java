@@ -12,6 +12,18 @@ import javax.persistence.Embeddable;
 public class Address {
 
     private String zipcode;
-    private String addressBasic;
-    private String addressDetail;
+    private String address;
+    private String addressdetail;
+
+    public Address(String zipcode, String address) {
+        this.zipcode = zipcode;
+        this.address = address;
+        this.addressdetail = null;
+    }
+
+    public Address(String zipcode, String address, String addressdetail) {
+        this.zipcode = zipcode;
+        this.address = address;
+        this.addressdetail = addressdetail;
+    }
 }

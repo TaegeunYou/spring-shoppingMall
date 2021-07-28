@@ -1,6 +1,5 @@
 package study.shoppingmall.config;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import study.shoppingmall.service.MemberService;
+import study.shoppingmall.handler.LoginFailHandler;
 
 @Configuration  //클래스안에 스프링 빈이 등록되도록 함
 @EnableWebSecurity  //Spring Security를 설정할 클래스로 정의
@@ -20,6 +20,7 @@ import study.shoppingmall.service.MemberService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {  //상속받아서 하는 일반적인 방법
 
     private final MemberService memberService;
+    private final LoginFailHandler loginFailHandler;
 
     @Bean   // Service에서 비밀번호를 암호화할 수 있도록 Bean으로 등록
     public PasswordEncoder passwordEncoder() {
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  //상속받�
     @Override
     public void configure(WebSecurity web) throws Exception {   //FitlerChainProxy를 생성하는 필터
         // static 디렉토리의 하위 파일 목록은 인증 무시
-        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/");
+        web.ignoring().antMatchers("/css/**", "/js/**", "/img/**", "/lib/**");
     }
 
     @Override
@@ -42,23 +43,28 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  //상속받�
                 //페이지 권한 설정
                 .authorizeRequests()    //HttpServletRequest에 따라 접근을 제한
                 .antMatchers("/admin/**").hasRole("ADMIN")  //특정 경로를 지정하여 롤(역할)에 따른 접근 권한 설정
-                .antMatchers("/user/myinfo").hasRole("MEMBER")
+                .antMatchers("/user/**").hasRole("MEMBER")
                 .antMatchers("/**").permitAll()
                 //.anyRequest().authenticated() //인증된 사용자만
-            .and()
+                .and()
                 //로그인 설정
                 .formLogin()
-                .loginPage("/user/login")   //커스텀 로그인 폼 (기본 로그인 폼 : /login) - 컨트롤러에서 매핑 필요
-                .defaultSuccessUrl("/user/login/result")    //로그인 성공시 이동되는 페이지 - 컨트롤러에서 매핑 필요
+                .loginPage("/loginform")   //커스텀 로그인 폼 (기본 로그인 폼 : /login) - 컨트롤러에서 매핑 필요
+                .failureHandler(loginFailHandler)
+                .failureUrl("/login-error")
+                .loginProcessingUrl("/loginform")
+                .defaultSuccessUrl("/")    //로그인 성공시 이동되는 페이지 - 컨트롤러에서 매핑 필요
+//                .usernameParameter("email")
+//                .passwordParameter("pw")
                 .permitAll()
-            .and()
+                .and()
                 //로그아웃 설정
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))    //기본 URL (/logout) 이 아닌 다른 URL로 재정의
                 .logoutSuccessUrl("/user/logout/result")
                 .invalidateHttpSession(true)    //HTTP 세션을 초기화하는 작업
                 //deleteCookies("key명") //로그아웃 시, 특정 쿠기 제거
-            .and()
+                .and()
                 // 403 예외처리 핸들링 // .exceptionHandling() 메서드로 예외 처리
                 .exceptionHandling().accessDeniedPage("/user/denied");  //접근권한이 없을 때 예외 처리
     }

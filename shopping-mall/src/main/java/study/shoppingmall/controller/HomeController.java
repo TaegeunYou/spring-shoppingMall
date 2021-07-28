@@ -17,8 +17,16 @@ public class HomeController {
         return "index";
     }
 
+    //내 정보 페이지
+    @GetMapping("/user/info")
+    public String dispMyInfo() {
+        return "/login";
+    }
 
 
-
-
+    //어드민 페이지
+    @GetMapping("/admin")
+    public String dispAdmin() {
+        return "/login";
+    }
 }

@@ -3,8 +3,7 @@ package study.shoppingmall.domain;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import study.shoppingmall.controller.MemberDto;
-import study.shoppingmall.domain.coupon.Coupon;
+import study.shoppingmall.dto.MemberDto;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -27,7 +26,7 @@ public class Member {
     private String pw;
 
     @Column(name = "member_name")
-    private String name;    //API마다 스펙이 다르므로 Dto에서 조건 걸어주기
+    private String name;
 
     @Column(name = "member_nickname")
     private String nickname;
@@ -36,7 +35,7 @@ public class Member {
     private String phone;
 
     @Column(name = "member_birthday")
-    private LocalDateTime birthday;
+    private String birthday;
 
     @Column(name = "member_gender")
     private String gender;
@@ -69,10 +68,12 @@ public class Member {
         this.pw = memberDto.getPw();
         this.name = memberDto.getName();
         this.nickname = memberDto.getNickname();
-        this.nickname = getNickname();
-        this.phone = getPhone();
-        this.birthday = getBirthday();
-        this.gender = getGender();
-        this.address = getAddress();
+        this.gender = memberDto.getGender();
+        this.birthday = memberDto.getBirthday();
+        this.phone = memberDto.getPhone();
+        this.gender = memberDto.getGender();
+        this.address = new Address(memberDto.getZipcode(), memberDto.getAddress(), memberDto.getAddressdetail());
+        this.joinDate = LocalDateTime.now();
+        this.grade = "normal";
     }
 }
