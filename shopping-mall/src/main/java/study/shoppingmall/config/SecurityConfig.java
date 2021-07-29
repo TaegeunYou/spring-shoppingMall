@@ -60,8 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {  //상속받�
                 .and()
                 //로그아웃 설정
                 .logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"))    //기본 URL (/logout) 이 아닌 다른 URL로 재정의
-                .logoutSuccessUrl("/user/logout/result")
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/")          //로그아웃 시 홈으로
                 .invalidateHttpSession(true)    //HTTP 세션을 초기화하는 작업
                 //deleteCookies("key명") //로그아웃 시, 특정 쿠기 제거
                 .and()

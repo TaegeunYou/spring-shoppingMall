@@ -71,6 +71,8 @@ public class MemberDto {
 //        this.phone = phone;
 //    }
 
+    //==생성 메서드==//
+
     public MemberDto(String email, String pw, String name, String nickname, String gender, String birthday, String phone, String zipcode, String address) {
         this.email = email;
         this.pw = pw;
@@ -82,7 +84,6 @@ public class MemberDto {
         this.zipcode = zipcode;
         this.address = address;
     }
-
     public MemberDto(String email, String pw, String name, String nickname, String gender, String birthday, String phone, String zipcode, String address, String addressdetail) {
         this.email = email;
         this.pw = pw;
@@ -96,6 +97,7 @@ public class MemberDto {
         this.addressdetail = addressdetail;
     }
 
+    //==Setter==//
     public void setPw(String pw) {
         this.pw = pw;
     }

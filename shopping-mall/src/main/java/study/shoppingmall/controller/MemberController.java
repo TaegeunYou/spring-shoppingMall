@@ -50,11 +50,11 @@ public class MemberController {
             model.addAttribute("memberDto", memberDto);
 
 
-            //유효성 통과 못한 필드와 메시지를 핸들링
-            Map<String, String> validatorResult = memberService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-                model.addAttribute(key, validatorResult.get(key));
-            }
+//            //유효성 통과 못한 필드와 메시지를 핸들링
+//            Map<String, String> validatorResult = memberService.validateHandling(errors);
+//            for (String key : validatorResult.keySet()) {
+//                model.addAttribute(key, validatorResult.get(key));
+//            }
 
             return "/signup";
         }
@@ -71,28 +71,6 @@ public class MemberController {
         return "/login";
     }
 
-//    @PostMapping("/loginform")
-//    public String execLogin(@Valid LoginDto loginDto, Errors errors, Model model) {
-//
-//        if (errors.hasErrors()) {
-//            log.info(errors.toString());
-//
-//            model.addAttribute("loginDto", loginDto);
-//
-//            //유효성 통과 못한 필드와 메시지를 핸들링
-//            Map<String, String> validatorResult = memberService.validateHandling(errors);
-//            for (String key : validatorResult.keySet()) {
-//                model.addAttribute(key, validatorResult.get(key));
-//            }
-//
-//            log.info("fail login");
-//            return "/login";
-//        }
-//
-//        log.info("success login");
-//        return "redirect:/";
-//    }
-
     @GetMapping("/login-error")
     public String loginfail(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession(false);
@@ -107,6 +85,7 @@ public class MemberController {
         model.addAttribute("errorMessage", errorMessage);
         return "/login";
     }
+
 
 
 }

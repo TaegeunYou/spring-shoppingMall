@@ -44,9 +44,8 @@ public class MemberService implements UserDetailsService {
         memberDto.setPw(passwordEncoder.encode(memberDto.getPw()));
 
         Member member = new Member(memberDto);
-
-
         memberRepository.save(member);
+
         return member.getId();
     }
 

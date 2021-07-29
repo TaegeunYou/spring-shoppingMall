@@ -13,7 +13,7 @@ import java.util.List;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Member {
+public class Member extends BaseEntity {
 
     @Id @GeneratedValue //strategy 추가해주기
     @Column(name = "member_id")
@@ -40,9 +40,6 @@ public class Member {
     @Column(name = "member_gender")
     private String gender;
 
-    @Column(name = "member_joindate")
-    private LocalDateTime joinDate;
-
     @Column(name = "member_grade")
     private String grade;
 
@@ -57,11 +54,11 @@ public class Member {
 
     //==생성 메서드==//
     //테스트 용도
-    public Member(String email, String pw, String name) {
-        this.email = email;
-        this.pw = pw;
-        this.name = name;
-    }
+//    public Member(String email, String pw, String name) {
+//        this.email = email;
+//        this.pw = pw;
+//        this.name = name;
+//    }
     //dto -> entity
     public Member(MemberDto memberDto) {
         this.email = memberDto.getEmail();
@@ -73,7 +70,6 @@ public class Member {
         this.phone = memberDto.getPhone();
         this.gender = memberDto.getGender();
         this.address = new Address(memberDto.getZipcode(), memberDto.getAddress(), memberDto.getAddressdetail());
-        this.joinDate = LocalDateTime.now();
         this.grade = "normal";
     }
 }
