@@ -1,10 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:style="http://www.w3.org/1999/xhtml">
-<style>
-  .fieldError {
-    border-color: #bd2130;
-  }
-</style>
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -12,6 +7,21 @@
   <title>Contact - Moderna Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+  <!-- 다음 우편번호 api -->
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
+  <script>
+    function openZipSearch() {
+      new daum.Postcode({
+        oncomplete: function(data) {
+          $('[name=zipcode]').val(data.zonecode); // 우편번호 (5자리)
+          $('[name=address]').val(data.address);
+          $('[name=addressDetail]').val(data.buildingName);
+        }
+      }).open();
+    }
+  </script>
 
   <!-- Favicons -->
   <link href="/assets/img/favicon.png" rel="icon">
@@ -137,42 +147,36 @@
           <div class="col-lg-6">
             <form role="form" th:action="@{/signup}" method="post" modelAttribute="memberDto" class="form-control-sm">
               <div class="form-group mt-5">
-                <input type="email" class="form-control" name="email" id="hello" th:value="${memberDto.email}" placeholder="아이디(이메일)"
-                       th:class="${#fields.hasErrors('memberDto')}? 'form-controlfieldError' : 'form-control'">
+                <input type="email" class="form-control" name="email" id="hello" th:value="${memberDto.email}" placeholder="아이디(이메일)">
                 <p th:if="${#fields.hasErrors('memberDto.email')}"
-                   th:errors="*{memberDto.email}" style="color: red">Incorrect date</p>
+                   th:errors="*{memberDto.email}" style="color: red">Incorrect</p>
               </div>
               <div class ="form-group mt-5">
-                <input type="password" class="form-control" name="pw" id="pw" th:value="${memberDto.pw}" placeholder="비밀번호"
-                       th:class="${#fields.hasErrors('memberDto')}? 'form-controlfieldError' : 'form-control'">
+                <input type="password" class="form-control" name="pw" id="pw" th:value="${memberDto.pw}" placeholder="비밀번호">
                 <p th:if="${#fields.hasErrors('memberDto.pw')}"
-                   th:errors="*{memberDto.pw}" style="color: red">Incorrect date</p>
+                   th:errors="*{memberDto.pw}" style="color: red">Incorrect</p>
               </div>
               <div class ="form-group mt-5">
-                <input type="password" class="form-control" name="pwCheck" id="pwCheck" th:value="${memberDto.pwc}" placeholder="비밀번호 확인"
-                       th:class="${#fields.hasErrors('memberDto')}? 'form-controlfieldError' : 'form-control'">
+                <input type="password" class="form-control" name="pwc" id="pwc" th:value="${memberDto.pwc}" placeholder="비밀번호 확인">
                 <p th:if="${#fields.hasErrors('memberDto.pwc')}"
-                   th:errors="*{memberDto.pwc}" style="color: red">Incorrect date</p>
+                   th:errors="*{memberDto.pwc}" style="color: red">Incorrect</p>
               </div>
               <div class="form-group mt-5">
                 <div class="row">
                   <div class="col-md-6 form-group">
-                    <input type="text" class="form-control" name="name" id="name" th:value="${memberDto.name}" placeholder="이름"
-                           th:class="${#fields.hasErrors('memberDto')}? 'form-controlfieldError' : 'form-control'">
+                    <input type="text" class="form-control" name="name" id="name" th:value="${memberDto.name}" placeholder="이름">
                     <p th:if="${#fields.hasErrors('memberDto.name')}"
-                       th:errors="*{memberDto.name}" style="color: red">Incorrect date</p>
+                       th:errors="*{memberDto.name}" style="color: red">Incorrect</p>
                   </div>
                   <div class="col-md-6 form-group mt-5 mt-md-0">
-                    <input type="text" class="form-control" name="nickname" id="nickname" th:value="${memberDto.nickname}" placeholder="별명"
-                           th:class="${#fields.hasErrors('memberDto')}? 'form-controlfieldError' : 'form-control'">
-                    <p th:if="${#fields.hasErrors('memberDto.name')}"
-                       th:errors="*{memberDto.nickname}" style="color: red">Incorrect date</p>
+                    <input type="text" class="form-control" name="nickname" id="nickname" th:value="${memberDto.nickname}" placeholder="닉네임">
+                    <p th:if="${#fields.hasErrors('memberDto.nickname')}"
+                       th:errors="*{memberDto.nickname}" style="color: red">Incorrect</p>
                   </div>
                 </div>
               </div>
               <div class="form-group mt-5">
-                  <select name="gender" class="form-control" id="gender" th:value="${memberDto.gender}"
-                          th:class="${#fields.hasErrors('memberDto')}? 'form-controlfieldError' : 'form-control'">
+                  <select name="gender" class="form-control" id="gender" th:value="${memberDto.gender}">
                     <option value="">-- 성별 --</option>
                     <option value="male">남성</option>
                     <option value="female">여성</option>
@@ -193,7 +197,7 @@
 <!--                </div>-->
                   </select>
                 <p th:if="${#fields.hasErrors('memberDto.gender')}"
-                   th:errors="*{memberDto.gender}" style="color: red">Incorrect date</p>
+                   th:errors="*{memberDto.gender}" style="color: red">Incorrect</p>
               </div>
 <!--              <div class ="form-group mt-5">-->
 <!--                <div class="row">-->
@@ -212,184 +216,201 @@
 <!--                  </div>-->
 <!--                </div>-->
 <!--              </div>-->
+
+<!--              <div class="form-group mt-5">-->
+<!--                <div class="row">-->
+<!--                  <div class="col-md-4 form-group">-->
+<!--                    <select name="year" class="form-control" id="year">-->
+<!--                      <option value="">&#45;&#45; 년 &#45;&#45;</option>-->
+<!--                      <option value="1921">1921</option>-->
+<!--                      <option value="1922">1922</option>-->
+<!--                      <option value="1923">1923</option>-->
+<!--                      <option value="1924">1924</option>-->
+<!--                      <option value="1925">1925</option>-->
+<!--                      <option value="1926">1926</option>-->
+<!--                      <option value="1927">1927</option>-->
+<!--                      <option value="1928">1928</option>-->
+<!--                      <option value="1929">1929</option>-->
+<!--                      <option value="1930">1930</option>-->
+<!--                      <option value="1931">1931</option>-->
+<!--                      <option value="1932">1932</option>-->
+<!--                      <option value="1933">1933</option>-->
+<!--                      <option value="1934">1934</option>-->
+<!--                      <option value="1935">1935</option>-->
+<!--                      <option value="1936">1936</option>-->
+<!--                      <option value="1937">1937</option>-->
+<!--                      <option value="1938">1938</option>-->
+<!--                      <option value="1939">1939</option>-->
+<!--                      <option value="1940">1940</option>-->
+<!--                      <option value="1941">1941</option>-->
+<!--                      <option value="1942">1942</option>-->
+<!--                      <option value="1943">1943</option>-->
+<!--                      <option value="1944">1944</option>-->
+<!--                      <option value="1945">1945</option>-->
+<!--                      <option value="1946">1946</option>-->
+<!--                      <option value="1947">1947</option>-->
+<!--                      <option value="1948">1948</option>-->
+<!--                      <option value="1949">1949</option>-->
+<!--                      <option value="1950">1950</option>-->
+<!--                      <option value="1951">1951</option>-->
+<!--                      <option value="1952">1952</option>-->
+<!--                      <option value="1953">1953</option>-->
+<!--                      <option value="1954">1954</option>-->
+<!--                      <option value="1955">1955</option>-->
+<!--                      <option value="1956">1956</option>-->
+<!--                      <option value="1957">1957</option>-->
+<!--                      <option value="1958">1958</option>-->
+<!--                      <option value="1959">1959</option>-->
+<!--                      <option value="1960">1960</option>-->
+<!--                      <option value="1961">1961</option>-->
+<!--                      <option value="1962">1962</option>-->
+<!--                      <option value="1963">1963</option>-->
+<!--                      <option value="1964">1964</option>-->
+<!--                      <option value="1965">1965</option>-->
+<!--                      <option value="1966">1966</option>-->
+<!--                      <option value="1967">1967</option>-->
+<!--                      <option value="1968">1968</option>-->
+<!--                      <option value="1969">1969</option>-->
+<!--                      <option value="1970">1970</option>-->
+<!--                      <option value="1971">1971</option>-->
+<!--                      <option value="1972">1972</option>-->
+<!--                      <option value="1973">1973</option>-->
+<!--                      <option value="1974">1974</option>-->
+<!--                      <option value="1975">1975</option>-->
+<!--                      <option value="1976">1976</option>-->
+<!--                      <option value="1977">1977</option>-->
+<!--                      <option value="1978">1978</option>-->
+<!--                      <option value="1979">1979</option>-->
+<!--                      <option value="1980">1980</option>-->
+<!--                      <option value="1981">1981</option>-->
+<!--                      <option value="1982">1982</option>-->
+<!--                      <option value="1983">1983</option>-->
+<!--                      <option value="1984">1984</option>-->
+<!--                      <option value="1985">1985</option>-->
+<!--                      <option value="1986">1986</option>-->
+<!--                      <option value="1987">1987</option>-->
+<!--                      <option value="1988">1988</option>-->
+<!--                      <option value="1989">1989</option>-->
+<!--                      <option value="1990">1990</option>-->
+<!--                      <option value="1991">1991</option>-->
+<!--                      <option value="1992">1992</option>-->
+<!--                      <option value="1993">1993</option>-->
+<!--                      <option value="1994">1994</option>-->
+<!--                      <option value="1995">1995</option>-->
+<!--                      <option value="1996">1996</option>-->
+<!--                      <option value="1997">1997</option>-->
+<!--                      <option value="1998">1998</option>-->
+<!--                      <option value="1999">1999</option>-->
+<!--                      <option value="2000">2000</option>-->
+<!--                      <option value="2001">2001</option>-->
+<!--                      <option value="2002">2002</option>-->
+<!--                      <option value="2003">2003</option>-->
+<!--                      <option value="2004">2004</option>-->
+<!--                      <option value="2005">2005</option>-->
+<!--                      <option value="2006">2006</option>-->
+<!--                      <option value="2007">2007</option>-->
+<!--                      <option value="2008">2008</option>-->
+<!--                      <option value="2009">2009</option>-->
+<!--                      <option value="2010">2010</option>-->
+<!--                      <option value="2011">2011</option>-->
+<!--                      <option value="2012">2012</option>-->
+<!--                      <option value="2013">2013</option>-->
+<!--                      <option value="2014">2014</option>-->
+<!--                      <option value="2015">2015</option>-->
+<!--                      <option value="2016">2016</option>-->
+<!--                      <option value="2017">2017</option>-->
+<!--                      <option value="2018">2018</option>-->
+<!--                      <option value="2019">2019</option>-->
+<!--                      <option value="2020">2020</option>-->
+<!--                      <option value="2021">2021</option>-->
+<!--                    </select>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-4 form-group mt-5 mt-md-0" >-->
+<!--                  <select name="month" class="form-control" id="month">-->
+<!--                    <option value="">&#45;&#45; 월 &#45;&#45;</option>-->
+<!--                    <option value="1">1</option>-->
+<!--                    <option value="2">2</option>-->
+<!--                    <option value="3">3</option>-->
+<!--                    <option value="4">4</option>-->
+<!--                    <option value="5">5</option>-->
+<!--                    <option value="6">6</option>-->
+<!--                    <option value="7">7</option>-->
+<!--                    <option value="8">8</option>-->
+<!--                    <option value="9">9</option>-->
+<!--                    <option value="10">10</option>-->
+<!--                    <option value="11">11</option>-->
+<!--                    <option value="12">12</option>-->
+<!--                  </select>-->
+<!--                  </div>-->
+<!--                  <div class="col-md-4 form-group mt-5 mt-md-0">-->
+<!--                  <select name="day" class="form-control" id="day">-->
+<!--                    <option value="">&#45;&#45; 일 &#45;&#45;</option>-->
+<!--                    <option value="1">1</option>-->
+<!--                    <option value="2">2</option>-->
+<!--                    <option value="3">3</option>-->
+<!--                    <option value="4">4</option>-->
+<!--                    <option value="5">5</option>-->
+<!--                    <option value="6">6</option>-->
+<!--                    <option value="7">7</option>-->
+<!--                    <option value="8">8</option>-->
+<!--                    <option value="9">9</option>-->
+<!--                    <option value="10">10</option>-->
+<!--                    <option value="11">11</option>-->
+<!--                    <option value="12">12</option>-->
+<!--                    <option value="13">13</option>-->
+<!--                    <option value="14">14</option>-->
+<!--                    <option value="15">15</option>-->
+<!--                    <option value="16">16</option>-->
+<!--                    <option value="17">17</option>-->
+<!--                    <option value="18">18</option>-->
+<!--                    <option value="19">19</option>-->
+<!--                    <option value="20">20</option>-->
+<!--                    <option value="21">21</option>-->
+<!--                    <option value="22">22</option>-->
+<!--                    <option value="23">23</option>-->
+<!--                    <option value="24">24</option>-->
+<!--                    <option value="25">25</option>-->
+<!--                    <option value="26">26</option>-->
+<!--                    <option value="27">27</option>-->
+<!--                    <option value="28">28</option>-->
+<!--                    <option value="29">29</option>-->
+<!--                    <option value="30">30</option>-->
+<!--                    <option value="31">31</option>-->
+<!--                  </select>-->
+<!--                  </div>-->
+<!--                </div>-->
+<!--              </div>-->
+
               <div class="form-group mt-5">
-                <div class="row">
-                  <div class="col-md-4 form-group">
-                    <select name="year" class="form-control" id="year">
-                      <option value="">-- 년 --</option>
-                      <option value="1921">1921</option>
-                      <option value="1922">1922</option>
-                      <option value="1923">1923</option>
-                      <option value="1924">1924</option>
-                      <option value="1925">1925</option>
-                      <option value="1926">1926</option>
-                      <option value="1927">1927</option>
-                      <option value="1928">1928</option>
-                      <option value="1929">1929</option>
-                      <option value="1930">1930</option>
-                      <option value="1931">1931</option>
-                      <option value="1932">1932</option>
-                      <option value="1933">1933</option>
-                      <option value="1934">1934</option>
-                      <option value="1935">1935</option>
-                      <option value="1936">1936</option>
-                      <option value="1937">1937</option>
-                      <option value="1938">1938</option>
-                      <option value="1939">1939</option>
-                      <option value="1940">1940</option>
-                      <option value="1941">1941</option>
-                      <option value="1942">1942</option>
-                      <option value="1943">1943</option>
-                      <option value="1944">1944</option>
-                      <option value="1945">1945</option>
-                      <option value="1946">1946</option>
-                      <option value="1947">1947</option>
-                      <option value="1948">1948</option>
-                      <option value="1949">1949</option>
-                      <option value="1950">1950</option>
-                      <option value="1951">1951</option>
-                      <option value="1952">1952</option>
-                      <option value="1953">1953</option>
-                      <option value="1954">1954</option>
-                      <option value="1955">1955</option>
-                      <option value="1956">1956</option>
-                      <option value="1957">1957</option>
-                      <option value="1958">1958</option>
-                      <option value="1959">1959</option>
-                      <option value="1960">1960</option>
-                      <option value="1961">1961</option>
-                      <option value="1962">1962</option>
-                      <option value="1963">1963</option>
-                      <option value="1964">1964</option>
-                      <option value="1965">1965</option>
-                      <option value="1966">1966</option>
-                      <option value="1967">1967</option>
-                      <option value="1968">1968</option>
-                      <option value="1969">1969</option>
-                      <option value="1970">1970</option>
-                      <option value="1971">1971</option>
-                      <option value="1972">1972</option>
-                      <option value="1973">1973</option>
-                      <option value="1974">1974</option>
-                      <option value="1975">1975</option>
-                      <option value="1976">1976</option>
-                      <option value="1977">1977</option>
-                      <option value="1978">1978</option>
-                      <option value="1979">1979</option>
-                      <option value="1980">1980</option>
-                      <option value="1981">1981</option>
-                      <option value="1982">1982</option>
-                      <option value="1983">1983</option>
-                      <option value="1984">1984</option>
-                      <option value="1985">1985</option>
-                      <option value="1986">1986</option>
-                      <option value="1987">1987</option>
-                      <option value="1988">1988</option>
-                      <option value="1989">1989</option>
-                      <option value="1990">1990</option>
-                      <option value="1991">1991</option>
-                      <option value="1992">1992</option>
-                      <option value="1993">1993</option>
-                      <option value="1994">1994</option>
-                      <option value="1995">1995</option>
-                      <option value="1996">1996</option>
-                      <option value="1997">1997</option>
-                      <option value="1998">1998</option>
-                      <option value="1999">1999</option>
-                      <option value="2000">2000</option>
-                      <option value="2001">2001</option>
-                      <option value="2002">2002</option>
-                      <option value="2003">2003</option>
-                      <option value="2004">2004</option>
-                      <option value="2005">2005</option>
-                      <option value="2006">2006</option>
-                      <option value="2007">2007</option>
-                      <option value="2008">2008</option>
-                      <option value="2009">2009</option>
-                      <option value="2010">2010</option>
-                      <option value="2011">2011</option>
-                      <option value="2012">2012</option>
-                      <option value="2013">2013</option>
-                      <option value="2014">2014</option>
-                      <option value="2015">2015</option>
-                      <option value="2016">2016</option>
-                      <option value="2017">2017</option>
-                      <option value="2018">2018</option>
-                      <option value="2019">2019</option>
-                      <option value="2020">2020</option>
-                      <option value="2021">2021</option>
-                    </select>
-                  </div>
-                  <div class="col-md-4 form-group mt-5 mt-md-0" >
-                  <select name="month" class="form-control" id="month">
-                    <option value="">-- 월 --</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                  </select>
-                  </div>
-                  <div class="col-md-4 form-group mt-5 mt-md-0">
-                  <select name="day" class="form-control" id="day">
-                    <option value="">-- 일 --</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                    <option value="25">25</option>
-                    <option value="26">26</option>
-                    <option value="27">27</option>
-                    <option value="28">28</option>
-                    <option value="29">29</option>
-                    <option value="30">30</option>
-                    <option value="31">31</option>
-                  </select>
-                  </div>
-                </div>
+                <input type="text" class="form-control" name="birthday" id="birthday" th:value="${memberDto.birthday}" placeholder="생년월일  ex) 20210727">
+                <p th:if="${#fields.hasErrors('memberDto.birthday')}"
+                   th:errors="*{memberDto.birthday}" style="color: red">Incorrect</p>
               </div>
               <div class="form-group mt-5">
-                <input type="text" class="form-control" name="phone" id="phone" th:value="${memberDto.phone}" placeholder="전화번호 (-를 제외하고 작성해 주세요)"
-                       th:class="${#fields.hasErrors('memberDto')}? 'form-controlfieldError' : 'form-control'">
+                <input type="text" class="form-control" name="phone" id="phone" th:value="${memberDto.phone}" placeholder="전화번호 ('-'를 제외하고 작성해 주세요)">
                 <p th:if="${#fields.hasErrors('memberDto.phone')}"
-                   th:errors="*{memberDto.phone}" style="color: red">Incorrect date</p>
+                   th:errors="*{memberDto.phone}" style="color: red">Incorrect</p>
               </div>
               <div>
                 <div class="form-group mt-5">
-                  <input type="text" class="form-control" name="zipcode" id="zipcode" placeholder="우편번호">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="text" class="form-control" name="zipcode" id="zipcode" th:value="${memberDto.zipcode}" placeholder="우편번호">
+                      <p th:if="${#fields.hasErrors('memberDto.zipcode')}"
+                         th:errors="*{memberDto.zipcode}" style="color: red">Incorrect</p>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="button" class="form-control" style="width:60px; height:32px;" onclick="openZipSearch()">검색</button><br>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mt-1">
+                  <input type="text" class="form-control" name="address" id="address" th:value="${memberDto.address}" placeholder="주소">
+                  <p th:if="${#fields.hasErrors('memberDto.address')}"
+                     th:errors="*{memberDto.address}" style="color: red">Incorrect</p>
                 </div>
                 <div class="form-group mt-2">
-                  <input type="text" class="form-control" name="address" id="address" placeholder="주소">
-                </div>
-                <div class="form-group mt-2">
-                  <input type="text" class="form-control" name="addressDetail" id="addressDetail" placeholder="상세 주소">
+                  <input type="text" class="form-control" name="addressdetail" id="addressdetail" th:value="${memberDto.addressdetail}" placeholder="상세 주소">
                 </div>
               </div>
 
@@ -399,13 +420,27 @@
 <!--              <div class="form-group mt-5">-->
 <!--                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>-->
 <!--              </div>-->
-              <div class="form-group mt-5">
-                <div class="text-center"><button type="submit">회원가입</button></div>
+
+
+
+<!--                <div style="text-align:center; margin:0 0 100px 0; background:#555; line-height:80px;">-->
+<!--                  <a style="color:#fff; font-weight:bold; font-family:tahoma; font-size:20pt;" href="https://ktsmemo.cafe24.com/s/dev/314" target="_blank">https://ktsmemo.cafe24.com/s/dev/314</a>-->
+<!--                </div>-->
+
+
+
+
+
+
+
+              <div class="form-group mt-4">
+                <div class="text-center"><button type="submit" class="btn btn-primary">회원가입</button></div>
               </div>
             </form>
           </div>
         </div>
       </div>
+
     </section><!-- End Contact Section -->
 
 <!--    &lt;!&ndash; ======= Map Section ======= &ndash;&gt;-->
@@ -502,6 +537,7 @@
       </div>
     </div>
   </footer><!-- End Footer -->
+
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
