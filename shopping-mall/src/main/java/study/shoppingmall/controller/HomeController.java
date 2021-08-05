@@ -17,6 +17,25 @@ public class HomeController {
         return "index";
     }
 
+    @GetMapping({"newProduct"})  //NEW 신상품
+    public String newProduct() {
+        log.info("newProduct controller");
+        return "newProduct";
+    }
+
+
+    @GetMapping({"search"})  //검색
+    public String search() {
+        log.info("search controller");
+        return "search";
+    }
+
+    @GetMapping({"detail"})  //상품 상세 정보(주문창)
+    public String detail() {
+        log.info("detail controller");
+        return "detail";
+    }
+
     //내 정보 페이지
     @GetMapping("/user/info")
     public String dispMyInfo() {
