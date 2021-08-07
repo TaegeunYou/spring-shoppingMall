@@ -102,54 +102,34 @@
     <section class="services">
         <div class="container">
           <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
-              <p>"xxx" 검색결과 n개</p>
-              <form action="/search" method="GET" class="form-control">
-                <div class="form-group mt-3">
-                  <div class="search">
-                      <div class="row">
-                        <div class="col-md-1 form-group"></div>
-                        <div class="col-md-8 form-group">
-                          <input name="keyword" type="text" class="form-control form-control-lg" placeholder="검색어 입력">
-                        </div>
-                        <div class="col-md-2 form-group mt-5 mt-md-0">
-                          <button class="btn btn-outline-dark btn-lg">search</button>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-                <hr>
-                <div class="col-lg-2">
-                  <p class="bg-secondary text-white">&nbsp;&nbsp;인기검색어</p>
-                </div>
-              </form>
-            </div>
+              <p style="text-align:center; font-weight:bold; font-size:2.0em"><span th:text="${products.get(0).category}"></span></p>
           </div>
-        <div class="form-group mt-5">
-          <form action="/search" method="GET">
-            <div class="row">
-              <div class="col-lg-1">
-                <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">추천순</button>
+          <div class="form-group mt-5">
+            <p style="text-align: right">총 n 개의 상품이 있습니다.</p>
+            <form action="/search" method="GET">
+              <div class="row">
+                <div class="col-lg-1">
+                  <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">추천순</button>
+                </div>
+                <div class="col-lg-1">
+                  <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">판매인기순</button>
+                </div>
+                <div class="col-lg-1">
+                  <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">낮은가격순</button>
+                </div>
+                <div class="col-lg-1">
+                  <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">높은가격순</button>
+                </div>
+                <div class="col-lg-1">
+                  <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">평점순</button>
+                </div>
+                <div class="col-lg-1">
+                  <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">등록일순</button>
+                </div>
               </div>
-              <div class="col-lg-1">
-                <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">판매인기순</button>
-              </div>
-              <div class="col-lg-1">
-                <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">낮은가격순</button>
-              </div>
-              <div class="col-lg-1">
-                <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">높은가격순</button>
-              </div>
-              <div class="col-lg-1">
-                <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">평점순</button>
-              </div>
-              <div class="col-lg-1">
-                <button type="button" style="font-size: 0.7em" class="form-control btn btn-outline-secondary" onclick = "location.href = 'signup' ">등록일순</button>
-              </div>
-            </div>
-          </form>
-        </div>
+            </form>
+
+          </div>
           <div class="form-group mt-4">
             <hr>
           </div>
@@ -164,24 +144,24 @@
 
         <div class="row">
 
-            <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up" th:each="product : ${products}">
-              <div class="card">
-                <div class="card-img">
-                  <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
-                </div>
-                <div class="card-body">
-                  <h5 class="card-text"><span th:text="${product.name}"></span></h5>
-                  <p class="card-text"><span th:text="${product.size}"></span></p>
-                  <h4 class="card-text">￦<span th:text="${product.price}"></span></h4>
-                  <p class="card-text">리뷰 224 | ★ 9.4</p>
-                </div>
+          <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up" th:each="product : ${products}">
+            <div class="card">
+              <div class="card-img">
+                <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
+              </div>
+              <div class="card-body">
+                <h5 class="card-text"><span th:text="${product.name}"></span></h5>
+                <p class="card-text"><span th:text="${product.size}"></span></p>
+                <h4 class="card-text">￦<span th:text="${product.price}"></span></h4>
+                <p class="card-text">리뷰 224 | ★ 9.4</p>
               </div>
             </div>
+          </div>
 
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
               </div>
                 <div class="card-body">
                   <h5 class="card-text">NORDLI 노르들리 수납침대프레임</a></h5>
@@ -191,11 +171,10 @@
                 </div>
             </div>
           </div>
-
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
               </div>
               <div class="card-body">
                 <h5 class="card-text">이름</a></h5>
@@ -208,7 +187,7 @@
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
               </div>
               <div class="card-body">
                 <h5 class="card-text">이름</a></h5>
@@ -221,7 +200,7 @@
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
               </div>
               <div class="card-body">
                 <h5 class="card-text">이름</a></h5>
@@ -234,7 +213,7 @@
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
               </div>
               <div class="card-body">
                 <h5 class="card-text">이름</a></h5>
@@ -247,7 +226,7 @@
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
               </div>
               <div class="card-body">
                 <h5 class="card-text">이름</a></h5>
@@ -260,7 +239,7 @@
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <img src="assets/img/service-details-2.jpg" alt="...">
+                <img src="/assets/img/service-details-2.jpg" alt="...">
               </div>
               <div class="card-body">
                 <h5 class="card-title"><a href="#">Our Plan</a></h5>
@@ -272,7 +251,7 @@
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <img src="assets/img/service-details-3.jpg" alt="...">
+                <img src="/assets/img/service-details-3.jpg" alt="...">
               </div>
               <div class="card-body">
                 <h5 class="card-title"><a href="#">Our Vision</a></h5>
@@ -285,7 +264,7 @@
           <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
             <div class="card">
               <div class="card-img">
-                <img src="assets/img/service-details-4.jpg" alt="...">
+                <img src="/assets/img/service-details-4.jpg" alt="...">
               </div>
               <div class="card-body">
                 <h5 class="card-title"><a href="#">Our Care</a></h5>
