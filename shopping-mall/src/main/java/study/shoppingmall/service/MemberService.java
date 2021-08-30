@@ -1,8 +1,10 @@
 package study.shoppingmall.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -80,16 +82,26 @@ public class MemberService implements UserDetailsService {
         return memberRepository.findById(memberId).get();
     }
 
+//    //회원 한명 조회
+//    public Member findMemberByEmail(String memberEmail) {
+//        return memberRepository.findByEmail(memberEmail).get(0);
+//    }
+
     /**
      * 회원 정보 수정
      *
      * 엔티티말고 MemberDto 클래스에 맞추기
      */
 
-//    @Transactional
-//    public void update(Long id, MemberDto) {    //변경 감지 이용
-//        MemberDto memberDto
-//    }
+    @Transactional
+    public void update(MemberDto memberDto) {    //변경 감지 이용
+        Member findMember = memberRepository.findByEmail(memberDto.getEmail()).get(0);
+
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        memberDto.setPw(passwordEncoder.encode(memberDto.getPw()));
+
+        findMember.changeMember(memberDto);
+    }
 
     /**
      * 회원가입 폼
@@ -119,6 +131,30 @@ public class MemberService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(Role.MEMBER.getValue()));
         }
         return new User(userEntity.getEmail(), userEntity.getPw(), authorities);
+    }
+
+    /**
+     * 해당 섹션에 있는 회원정보 조회
+     */
+    public Long findMyId() {
+
+        //세션 객체 안에 있는 ID정보 저장
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String memberEmail = auth.getName(); //get logged in username
+
+        Member member = memberRepository.findByEmail(memberEmail).get(0);
+
+        return member.getId();
+    }
+
+    /**
+     * memberId -> MemberDto
+     */
+    public MemberDto memberIdToDto() {
+
+       Member member = memberRepository.getById(findMyId());
+
+       return new MemberDto(member);
     }
 }
 

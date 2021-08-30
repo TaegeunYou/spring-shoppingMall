@@ -1,25 +1,34 @@
 package study.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import study.shoppingmall.domain.Member;
+import study.shoppingmall.domain.Message;
 import study.shoppingmall.domain.Product;
 import study.shoppingmall.dto.ProductDto;
+import study.shoppingmall.service.CartService;
+import study.shoppingmall.service.MemberService;
 import study.shoppingmall.service.ProductService;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class ProductController {
 
     private final ProductService productService;
+    private final MemberService memberService;
+    private final CartService cartService;
 
     /**
      * 상품 등록
@@ -54,11 +63,24 @@ public class ProductController {
     /**
      * 상품 목록 조회
      */
-    @GetMapping("products")
-    public String list(Model model) {
-        List<Product> products = productService.findProducts();
+//    @GetMapping("products")
+//    public String list(Model model) {
+//        List<Product> products = productService.findProducts();
+//        model.addAttribute("products", products);
+//        return "products/productList";      //프론트단 구현해야됨
+//    }
+    @GetMapping("/search")  //검색
+    public String search(@RequestParam(value = "keyword") String keyword, Model model) {
+        List<ProductDto> products = productService.findProducts(keyword);
         model.addAttribute("products", products);
-        return "products/productList";      //프론트단 구현해야됨
+        return "search";
+    }
+
+    @GetMapping("category/{keyword}")
+    public String productCategory(@PathVariable("keyword") String keyword, Model model) {
+        List<ProductDto> products = productService.findProductsByCategory(keyword);
+        model.addAttribute("products", products);
+        return "category";
     }
 
     /**
@@ -74,5 +96,34 @@ public class ProductController {
                 productDto.getPrice(), productDto.getStock());
 
         return "redirect:/";    //페이지 바꿔줘야됨
+    }
+
+    /**
+     * 상품 조회
+     */
+    @GetMapping({"/detail/{id}"})  //상품 상세 정보(주문창)
+    public String detail(@PathVariable("id") Long id, Model model) {
+        ProductDto productDto = productService.getProductDto(id);
+
+        model.addAttribute("product", productDto);
+        return "detail";
+    }
+
+    /**
+     * 장바구니 담기
+     */
+    @PostMapping({"/detail/{id}"})
+    public ModelAndView cart(@PathVariable("id") Long productId, HttpSession session,
+                       @RequestParam(value = "category") String category,
+                       @RequestParam(value = "count") int count,
+                       ModelAndView mav) {
+
+        Long memberId = memberService.findMyId();
+        cartService.addCart(memberId, productId, category, count);
+
+        mav.addObject("data", new Message("장바구니에 담겼습니다.", "/"));
+        mav.setViewName("Message");
+
+        return mav;
     }
 }

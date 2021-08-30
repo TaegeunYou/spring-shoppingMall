@@ -49,6 +49,9 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<Cart> carts = new ArrayList<>();
+
 //    @OneToOne
 //    private List<Coupon> couponList = new ArrayList<>();  //미구현
 
@@ -61,6 +64,19 @@ public class Member extends BaseEntity {
 //    }
     //dto -> entity
     public Member(MemberDto memberDto) {
+        this.email = memberDto.getEmail();
+        this.pw = memberDto.getPw();
+        this.name = memberDto.getName();
+        this.nickname = memberDto.getNickname();
+        this.gender = memberDto.getGender();
+        this.birthday = memberDto.getBirthday();
+        this.phone = memberDto.getPhone();
+        this.gender = memberDto.getGender();
+        this.address = new Address(memberDto.getZipcode(), memberDto.getAddress(), memberDto.getAddressdetail());
+        this.grade = "normal";
+    }
+
+    public void changeMember(MemberDto memberDto) {
         this.email = memberDto.getEmail();
         this.pw = memberDto.getPw();
         this.name = memberDto.getName();

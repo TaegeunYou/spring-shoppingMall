@@ -52,6 +52,9 @@ public class Product extends BaseEntity {
     @Column(name = "product_stock")
     private int stock;          //재고
 
+    @OneToMany(mappedBy = "product")
+    private List<Cart> carts = new ArrayList<>();
+
 //    @OneToMany(mappedBy = "products")
 //    private List<CategoryProduct> categories = new ArrayList<>();
 

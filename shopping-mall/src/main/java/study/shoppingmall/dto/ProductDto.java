@@ -3,6 +3,7 @@ package study.shoppingmall.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import study.shoppingmall.domain.Product;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,8 @@ import javax.validation.constraints.NotNull;
 @Getter @Setter
 @NoArgsConstructor
 public class ProductDto {
+
+    private long id;
 
     @NotBlank(message = "상품명을 입력해 주세요.")
     private String name;        //상품명
@@ -42,17 +45,31 @@ public class ProductDto {
     private int stock;          //재고    -> 숫자만 적을수있도록
 
     //==생성 메서드==//
-    public ProductDto(String name, int price, int stock, String detail, String category,
-                      String size, String origin, String material, String color, String ASPhone) {
+
+    public ProductDto(String name, String category, String color, String material, String size, String origin, String ASPhone, String detail, int price, int stock) {
         this.name = name;
-        this.price = price;
-        this.stock = stock;
-        this.detail = detail;
         this.category = category;
+        this.color = color;
+        this.material = material;
         this.size = size;
         this.origin = origin;
-        this.material = material;
-        this.color = color;
         this.ASPhone = ASPhone;
+        this.detail = detail;
+        this.price = price;
+        this.stock = stock;
+    }
+
+    public ProductDto(Product product) {
+        this.id = product.getId();
+        this.name = product.getName();
+        this.category = product.getCategory();
+        this.color = product.getColor();
+        this.material = product.getMaterial();
+        this.size = product.getSize();
+        this.origin = product.getOrigin();
+        this.ASPhone = product.getASPhone();
+        this.detail = product.getDetail();
+        this.price = product.getPrice();
+        this.stock = product.getStock();
     }
 }

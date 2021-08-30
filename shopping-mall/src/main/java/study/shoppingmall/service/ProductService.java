@@ -7,7 +7,9 @@ import study.shoppingmall.domain.Product;
 import study.shoppingmall.dto.ProductDto;
 import study.shoppingmall.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,9 +39,9 @@ public class ProductService {
     /**
      * 전체 조회
      */
-    public List<Product> findProducts() {
-        return productRepository.findAll();
-    }
+//    public List<Product> findProducts() {
+//        return productRepository.findAll();
+//    }
 
     /**
      * 한개 조회
@@ -47,4 +49,45 @@ public class ProductService {
     public Product findById(Long productId) {
         return productRepository.findById(productId).get();
     }
+
+    public ProductDto getProductDto(Long id) {
+        Product product = productRepository.findById(id).get();
+
+        ProductDto productDto = new ProductDto(product);
+
+        return productDto;
+    }
+
+    /**
+     * 이름으로 조회
+     */
+    public List<ProductDto> findProducts(String keyword) {
+        List<Product> products = productRepository.findByNameContainingOrCategoryContaining(keyword, keyword);
+        List<ProductDto> productDtoList = new ArrayList<>();
+
+        if (products.isEmpty()) return productDtoList;
+
+        for (Product product : products) {
+            productDtoList.add(new ProductDto(product));
+        }
+
+        return productDtoList;
+    }
+
+    /**
+     * 카테고리로 조회
+     */
+    public List<ProductDto> findProductsByCategory(String keyword) {
+        List<Product> products = productRepository.findByCategory(keyword);
+        List<ProductDto> productDtoList = new ArrayList<>();
+
+        if (products.isEmpty()) return productDtoList;
+
+        for (Product product : products) {
+            productDtoList.add(new ProductDto(product));
+        }
+
+        return productDtoList;
+    }
+
 }

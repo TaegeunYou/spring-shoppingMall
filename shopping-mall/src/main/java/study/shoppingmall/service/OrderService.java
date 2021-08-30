@@ -81,6 +81,14 @@ public class OrderService {
 //    public List<Order> findOrders(OrderSerarch orderSerarch) {
 //        return orderRepository.findAll(orderSerarch);
 //    }
+
+    /**
+     * 장바구니 담기
+     */
+    @Transactional
+    public void addCart() {
+
+    }
 }
 
 

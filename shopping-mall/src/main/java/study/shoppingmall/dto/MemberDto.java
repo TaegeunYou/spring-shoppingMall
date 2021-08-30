@@ -2,6 +2,7 @@ package study.shoppingmall.dto;
 
 import lombok.*;
 import study.shoppingmall.domain.Address;
+import study.shoppingmall.domain.Member;
 
 import javax.persistence.Embedded;
 import javax.validation.constraints.*;
@@ -95,6 +96,23 @@ public class MemberDto {
         this.zipcode = zipcode;
         this.address = address;
         this.addressdetail = addressdetail;
+    }
+
+    public MemberDto(Member member) {
+        this.email = member.getEmail();
+        this.pw = member.getPw();
+        this.name = member.getName();
+        this.nickname = member.getNickname();
+        this.gender = member.getGender();
+        this.birthday = member.getBirthday();
+        this.phone = member.getPhone();
+        this.zipcode = member.getAddress().getZipcode();
+        this.address = member.getAddress().getAddress();
+        this.addressdetail = member.getAddress().getAddressdetail();
+    }
+
+    public MemberDto(Long Id) {
+
     }
 
     //==Setter==//
