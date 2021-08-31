@@ -2,22 +2,17 @@ package study.shoppingmall.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import study.shoppingmall.domain.Member;
 import study.shoppingmall.domain.Message;
-import study.shoppingmall.domain.Product;
 import study.shoppingmall.dto.ProductDto;
 import study.shoppingmall.service.CartService;
 import study.shoppingmall.service.MemberService;
 import study.shoppingmall.service.ProductService;
 
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -112,8 +107,8 @@ public class ProductController {
     /**
      * 장바구니 담기
      */
-    @PostMapping({"/detail/{id}"})
-    public ModelAndView cart(@PathVariable("id") Long productId, HttpSession session,
+    @PostMapping(value = {"/detail/{id}"}, params = "cart")
+    public ModelAndView cart(@PathVariable("id") Long productId,
                        @RequestParam(value = "category") String category,
                        @RequestParam(value = "count") int count,
                        ModelAndView mav) {
@@ -125,5 +120,16 @@ public class ProductController {
         mav.setViewName("Message");
 
         return mav;
+    }
+
+    @PostMapping(value = {"/detail/{id}"}, params = "buy")
+    public String justOrder(@PathVariable("id") String productId,
+                            @RequestParam(value = "category") String category,
+                            @RequestParam(value = "count") int count) {
+
+        Long memberId = memberService.findMyId();
+        cartService.addCart(memberId, Long.parseLong(productId), category, count);
+
+        return "redirect:/order";
     }
 }

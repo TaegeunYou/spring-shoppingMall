@@ -21,11 +21,14 @@ public class Order {
 
     private LocalDateTime orderDate;
 
-//    @Column(name = "receiver_name")
-//    private String name;
-//
-//    @Column(name = "receiver_phone")
-//    private String phone;
+    @Column(name = "receiver_name")
+    private String receiverName;
+
+    @Column(name = "receiver_phone")
+    private String receiverPhone;
+
+    @Column(name = "detail")
+    private String detail;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
@@ -53,15 +56,19 @@ public class Order {
     }
 
     //==생성 메서드==//
-    protected Order(Member member, Delivery delivery, OrderStatus status) {
+    protected Order(String receiverName, String receiverPhone, String detail, Member member, Delivery delivery, OrderStatus status) {
+        this.receiverName = receiverName;
+        this.receiverPhone = receiverPhone;
+        this.detail = detail;
         this.member = member;
         this.delivery = delivery;
         this.status = status;
         this.orderDate = LocalDateTime.now();
     }
 
-    public static Order createOrder(Member member, Delivery delivery, List<OrderProduct> orderProducts) {
-        Order order = new Order(member, delivery, OrderStatus.ORDER);
+    public static Order createOrder(String receiverName, String receiverPhone, String detail,
+                                    Member member, Delivery delivery, List<OrderProduct> orderProducts) {
+        Order order = new Order(receiverName, receiverPhone, detail, member, delivery, OrderStatus.ORDER);
         for (OrderProduct orderProduct : orderProducts) {
             order.addOrderProduct(orderProduct);
         }

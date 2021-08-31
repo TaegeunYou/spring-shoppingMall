@@ -80,5 +80,11 @@ public class CartService {
         cartRepository.deleteById(id);
     }
 
+    @Transactional
+    public void deleteAllCart(List<CartDto> cartList) {
+        Long memberId = cartRepository.findById(cartList.get(0).getId()).get().getMember().getId();
+        cartRepository.deleteAllByMemberId(memberId);
+    }
+
 
 }

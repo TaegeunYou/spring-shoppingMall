@@ -100,7 +100,7 @@ public class MemberController {
      * 내 정보 페이지
      */
     @GetMapping("/user/info")
-    public String dispMyInfo(MemberDto memberDto, HttpSession session, Model model) throws Exception{
+    public String dispMyInfo(MemberDto memberDto, Model model) throws Exception {
 
         memberDto = memberService.memberIdToDto();
 
