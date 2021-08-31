@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="utf-8">
@@ -140,43 +140,43 @@
               <div class="row">
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                     <div class="card-img">
-                      <a href="#"><img src="assets/img/bed2.png" alt="..."></a>
+                      <a href="#"><img src="/assets/img/bed2.png" alt="..."></a>
                     </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                     <div class="card-img">
-                      <a href="#"><img src="assets/img/bed9.png" alt="..."></a>
+                      <a href="#"><img src="/assets/img/bed9.png" alt="..."></a>
                     </div>
                 </div>
 
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed3.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed3.png" alt="..."></a>
                   </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed4.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed4.png" alt="..."></a>
                   </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed5.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed5.png" alt="..."></a>
                   </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed6.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed6.png" alt="..."></a>
                   </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed7.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed7.png" alt="..."></a>
                   </div>
                 </div>
                 <div class="col-md-6 d-flex align-items-stretch mb-3" data-aos="fade-up">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed8.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed8.png" alt="..."></a>
                   </div>
                 </div>
               </div>
@@ -195,16 +195,23 @@
               <hr>
               <div>
                 <form role="form" method="post" class="form-control-sm">
-                  <select name="gender" class="form-control" id="gender">
+                  <select name="category" class="form-control" id="category">
                     <option value="">-- 매트리스 --</option>
-                    <option value="male">화이트/모스훌트 단단함</option>
-                    <option value="female">화이트/말포르스 푹신함</option>
-                    <option value="middle">화이트/말포르스 단단함</option>
-                    <option value="middle">화이트/후스비카 단단함</option>
+                    <option value="1" id="1">화이트/모스훌트 단단함</option>
+                    <option value="2" id="2">화이트/말포르스 푹신함</option>
+                    <option value="3" id="3">화이트/말포르스 단단함</option>
+                    <option value="4" id="4">화이트/후스비카 단단함</option>
                   </select>
                   <br>
+                  <input type="number" class="form-control" name="count" value="count" placeholder="수량">
+                  <br>
                   <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-primary btn-lg">구매하기</button>
+                    <button type="submit" class="btn btn-primary btn-lg" name="cart" value="cart">장바구니 담기</button>
+                  </div>
+                  <div class ="form-group mt-1"></div>
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg" name="buy" value="buy">구매하기</button>
+<!--                    <button type="button" onclick="location.href='/detail/{id}/order'" class="btn btn-primary btn-lg">구매하기</button>-->
                   </div>
                 </form>
               </div>
@@ -279,7 +286,7 @@
               <div class="col-md-5 d-flex align-items-stretch" data-aos="fade-up">
                 <div class="card">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
                   </div>
                   <div class="card-body">
                     <h5 class="card-text">NORDLI 노르들리 수납침대프레임</a></h5>
@@ -292,7 +299,7 @@
               <div class="col-md-5 d-flex align-items-stretch" data-aos="fade-up">
                 <div class="card">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
                   </div>
                   <div class="card-body">
                     <h5 class="card-text">이름</a></h5>
@@ -307,7 +314,7 @@
               <div class="col-md-4 d-flex align-items-stretch" data-aos="fade-up">
                 <div class="card">
                   <div class="card-img">
-                    <a href="#"><img src="assets/img/bed1.png" alt="..."></a>
+                    <a href="#"><img src="/assets/img/bed1.png" alt="..."></a>
                   </div>
                   <div class="card-body">
                     <h5 class="card-text">이름</a></h5>

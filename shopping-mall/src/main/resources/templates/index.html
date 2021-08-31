@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Moderna Bootstrap Template - Index</title>
+  <title>국민가구 온라인쇼핑몰</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -43,7 +43,7 @@
     <div class="container d-flex justify-content-between align-items-center">
 
       <div class="logo">
-        <h1 class="text-light"><a href="index.html"><span>Moderna</span></a></h1>
+        <h1 class="text-light"><a href="home"><span>국민가구</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -65,20 +65,20 @@
             <ul>
               <li class="dropdown"><a href="bed"><span>침대</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="category/bed">침대 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="category/bed">슈퍼/싱글침대</a></li>
+                  <li><a href="#">퀸/킹침대</a></li>
+                  <li><a href="#">패밀리침대</a></li>
+                  <li><a href="#">벙커/이층침대</a></li>
+                  <li><a href="#">흙침대</a></li>
+                  <li><a href="#">모션베드</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a href="#"><span>매트리스</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="#">싱글/슈퍼싱글</a></li>
+                  <li><a href="#">퀸/킹</a></li>
+                  <li><a href="#">접이식매트리스</a></li>
+                  <li><a href="#">흙침대보료</a></li>
                 </ul>
               </li>
               <li><a href="#">화장대</a></li>
@@ -91,11 +91,11 @@
             <ul>
               <li class="dropdown"><a href="#"><span>소파</span> <i class="bi bi-chevron-right"></i></a>
                 <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+                  <li><a href="#">1인용</a></li>
+                  <li><a href="#">2~3인용</a></li>
+                  <li><a href="#">4인용</a></li>
+                  <li><a href="#">리클라이너 소파</a></li>
+                  <li><a href="#">소파베드</a></li>
                 </ul>
               </li>
               <li><a href="#">거실장</a></li>
@@ -138,9 +138,9 @@
           <li><a sec:authorize="isAnonymous()" href="signup">회원가입</a></li>
           <li class="dropdown"><a sec:authorize="hasRole('ROLE_MEMBER')" href="user/info"><span>마이페이지</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#">내 정보</a></li>
+              <li><a href="/user/info">내 정보</a></li>
               <li><a href="#">주문/취소 목록</a></li>
-              <li><a href="#">장바구니</a></li>
+              <li><a href="/user/cart">장바구니</a></li>
             </ul>
           </li>
           <li class="dropdown"><a sec:authorize="hasRole('ROLE_ADMIN')" href="admin"><span>관리자페이지</span> <i class="bi bi-chevron-down"></i></a>
