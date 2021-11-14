@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>국민가구 온라인쇼핑몰</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Roboto:300,300i,400,400i,500,500i,700,700i&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+
+  <link href="/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+  <link href="/assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/assets/css/style.css" rel="stylesheet">
+  <link href="/assets/css/table.css" rel="stylesheet">
+
+  <!-- =======================================================
+  * Template Name: Moderna - v4.3.0
+  * Template URL: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+<body>
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top d-flex align-items-center">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="logo">
+      <h1 class="text-light"><a href="/home"><span>국민가구</span></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+    </div>
+    <form class="d-flex" action="/search" method="GET">
+      <input class="form-control me-2" type="search" name="keyword" placeholder="검색어 입력" aria-label="Search">
+      <button class="btn btn-outline-light" type="submit">Search</button>
+    </form>
+    <nav id="navbar" class="navbar">
+      <ul>
+        <li class="dropdown"><a href="#"><span>침실가구</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li class="dropdown"><a href="/Bed"><span>침대</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="/Bed/Super-Single">슈퍼/싱글침대</a></li>
+                <li><a href="/Bed/Queen-King">퀸/킹침대</a></li>
+                <li><a href="/Bed/Family">패밀리침대</a></li>
+                <li><a href="/Bed/Bunk">벙커/이층침대</a></li>
+                <li><a href="/Bed/Dirt">흙침대</a></li>
+                <li><a href="/Bed/Motion">모션베드</a></li>
+              </ul>
+            </li>
+            <li class="dropdown"><a href="/Mattress"><span>매트리스</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="/Mattress/Super-Single">싱글/슈퍼싱글</a></li>
+                <li><a href="/Mattress/Queen-King">퀸/킹</a></li>
+                <li><a href="/Mattress/Foldable">접이식매트리스</a></li>
+                <li><a href="/Mattress/Dirt">흙침대보료</a></li>
+              </ul>
+            </li>
+            <li><a href="/Lowboy">화장대</a></li>
+            <li><a href="/Chiffonier">서랍장</a></li>
+            <li><a href="/Closet">옷장</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#"><span>거실가구</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li class="dropdown"><a href="/Sofa"><span>소파</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="/Sofa/1Person">1인용</a></li>
+                <li><a href="/Sofa/2-3Person">2~3인용</a></li>
+                <li><a href="/Sofa/4Person">4인용</a></li>
+                <li><a href="/Sofa/Recliner">리클라이너 소파</a></li>
+                <li><a href="/Sofa/Bed">소파베드</a></li>
+              </ul>
+            </li>
+            <li><a href="/TV-Stand">거실장</a></li>
+            <li><a href="/Table">테이블</a></li>
+            <li><a href="/Cabinet">장식장</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#"><span>주방가구</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li class="dropdown"><a href="/Cooktable"><span>식탁</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="/Cooktable/2Person">2인 식탁</a></li>
+                <li><a href="/Cooktable/4Person">4인 식탁</a></li>
+                <li><a href="/Cooktable/6Person">6인 식탁</a></li>
+              </ul>
+            </li>
+            <li><a href="/Kitchen-Storage">주방수납</a></li>
+            <li><a href="/Kitchen-Chair">의자</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a href="#"><span>서재/학생가구</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="/Carrel-Desk">책상</a></li>
+            <li><a href="/Bookshelf">책장</a></li>
+            <li class="dropdown"><a href="/Chair/"><span>의자</span> <i class="bi bi-chevron-right"></i></a>
+              <ul>
+                <li><a href="/Chair/Desk">책상의자</a></li>
+                <li><a href="/Chair/Office">서재/사무용의자</a></li>
+                <li><a href="/Chair/Gaming">게이밍체어</a></li>
+                <li><a href="/Chair/Bed">침대형의자</a></li>
+              </ul>
+            </li>
+            <li><a href="/Desk-Accessories">책상소품</a></li>
+          </ul>
+        </li>
+        <li><a href="/board/list">자유게시판</a></li>
+        <li><a sec:authorize="isAnonymous()" href="/loginform">로그인</a></li>
+        <li><a sec:authorize="isAnonymous()" href="/signup">회원가입</a></li>
+        <li class="dropdown"><a sec:authorize="hasRole('ROLE_MEMBER')" href="/user/info"><span>마이페이지</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="/user/info">내 정보</a></li>
+            <li><a href="/user/orderlist">주문/배송 조회</a></li>
+            <li><a href="/user/cart">장바구니</a></li>
+          </ul>
+        </li>
+        <li class="dropdown"><a sec:authorize="hasRole('ROLE_ADMIN')" href="#"><span>관리자페이지</span> <i class="bi bi-chevron-down"></i></a>
+          <ul>
+            <li><a href="/admin/product/new">상품 등록</a></li>
+            <li><a href="/admin/adminProductList">상품 목록</a></li>
+            <li><a href="/admin/adminOrderList">주문 목록</a></li>
+            <li><a href="/admin/adminMemberList">회원 목록</a></li>
+          </ul>
+        </li>
+        <li><a sec:authorize="isAuthenticated()" href="/logout">로그아웃</a></li>
+      </ul>
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav><!-- .navbar -->
+  </div>
+</header><!-- End Header -->
+
+<main id="main">
+
+  <!-- ======= Contact Section ======= -->
+  <section class="breadcrumbs">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center">
+        <h2></h2>
+        <ol>
+          <li></li>
+        </ol>
+      </div>
+    </div>
+  </section><!-- End Contact Section -->
+
+  <!-- ======= Contact Section ======= -->
+  <section class="contact" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+    <div class="container">
+      <div class="container">
+        <div class="row">
+          <h3 class="col-lg-2" style="text-align: start">주문 목록</h3>
+        </div>
+        <table class="type11">
+          <thead>
+          <tr style="background: #32cd32">
+            <th scope="cols">주문번호</th>
+            <th scope="cols">고객 정보</th>
+            <th scope="cols">상품 정보</th>
+            <th scope="cols">배송상태</th>
+            <th scope="cols">주문일자</th>
+            <th scope="cols">요청사항</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="order : ${orders}">
+            <td th:text="${order.id}"></td>
+            <td th:text="${order.memberName + order.memberEmail}"></td>
+            <td th:text="${order.productName + ' : ' + order.productCount + '개'}"></td>
+            <td th:text="${order.deliveryStatus}"></td>
+            <td th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${order.orderDetail}"></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section><!-- End Contact Section -->
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" data-aos="fade-up" data-aos-easing="ease-in-out" data-aos-duration="500">
+  <div class="footer-newsletter">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>국민가구</h4>
+          <p>합리적인 가격대의 제품들로 우리 집에 환상적인 분위기를 가득 불어넣어 줄 아이디어를 얻을 수 있어요!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4><a href="/home">Home</a></h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Bed">침대</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Mattress">매트리스</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Lowboy">화장대</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Chiffonier">서랍장</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Closet">옷장</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 footer-links">
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Sofa">소파</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/TV-Stand">거실장</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Table">테이블</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Cabinet">장식장</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Cooktable">식탁</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Kitchen-Storage">주방수납</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 footer-links">
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Kitchen-Chair">주방의자</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Carrel-Desk">책상</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Bookshelf">책장</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Chair">책상의자</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="/Desk-Accessories">책상소품</a></li>
+          </ul>
+          <p>
+            <strong>Phone:</strong> 010 1234 5678<br>
+            <strong>Email:</strong> abc@example.com<br>
+          </p>
+        </div>
+        <div class="col-lg-3 col-md-6 footer-info">
+          <h3>About 국민가구</h3>
+          <p>지금부터 20년 후에 너는 네가 한 일보다 하지 않은 일 때문에 더 실망하게 될 것이다. 그러므로 돛을 올려라. 안전한 항구를 벗어나 멀리 항해하라. 돛에 한가득 무역풍을 실어라. 탐험하라. 꿈꾸어라. 발견하라.</p>
+          <div class="social-links mt-5">
+            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="copyright">
+      &copy; Copyright <strong><span>Moderna</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      <!-- All the links in the footer should remain intact. -->
+      <!-- You can delete the links only if you purchased the pro version. -->
+      <!-- Licensing information: https://bootstrapmade.com/license/ -->
+      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/free-bootstrap-template-corporate-moderna/ -->
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </div>
+</footer><!-- End Footer -->
+
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/aos/aos.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/glightbox/js/glightbox.min.js"></script>
+<script src="/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/assets/vendor/purecounter/purecounter.js"></script>
+<script src="/assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="/assets/vendor/waypoints/noframework.waypoints.js"></script>
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
